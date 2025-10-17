@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:Lang="EN" Lang="EN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/minggu 6/css/reservasicss" type="text/css" />
+<title>Formulir Reservasi Hotel</title>
+</head>
+<body>
+
+<form action="" method="post">
+  <fieldset style="width: 80%;">
+    <legend>Personal Date</legend>
+    <ol>
+      <li>
+        Name<br />
+        <input type="text" name="name" id="name" size="35" />
+      </li>
+      <li>
+        Gender<br />
+        <input type="text" name="gender" id="gender" size="35" />
+      </li>
+      <li>
+        Email Address<br />
+        <input type="text" name="email" id="email" size="35" />
+      </li>
+      <li>
+        Telp Number<br />
+        <input type="text" name="telp" id="telp" size="35" />
+      </li>
+    </ol>
+  </fieldset>
+
+
+  <p>Reservation Room form</p>
+  <ol>
+    <li>
+      Reservatorn Name<br />
+      <input type="text" name="reservatorn" id="reservatorn" size="35" />
+    </li>
+    <li>
+      Bookig date<br />
+      <input type="date" name="bookingdate" id="bookingdate" size="35" />
+    </li>
+    <li>
+      Room Type<br />
+      <select name="roomtype" id="roomtype">
+        <option>Deluxe</option>
+        <option>Superior</option>
+        <option>Standard</option>
+      </select>
+    </li>
+    <li>
+      Bed Type<br />
+      <select name="bedtype" id="bedtype">
+        <option>Single bed</option>
+        <option>Double bed</option>
+        <option>King size bed</option>
+      </select>
+    </li>
+    <li>
+      Breakfast<br />
+      <input type="radio" name="breakfast" id="with" value="with" /> With Breakfast
+      <input type="radio" name="breakfast" id="without" value="without" /> Whitout Breakfast
+    </li>
+  </ol>
+
+  <fieldset style="width: 80%;">
+    <legend>Payment</legend>
+    <ol>
+      <li>
+        Check in date<br />
+        <input type="date" name="checkin" id="checkin" size="35" />
+      </li>
+      <li>
+        Check out date<br />
+        <input type="date" name="checkout" id="checkout" size="35" />
+      </li>
+      <li>
+        Payment Method<br />
+        <select name="payment" id="payment">
+          <option>cash</option>
+          <option>credit card</option>
+          <option>debit card</option>
+        </select>
+      </li>
+    </ol>
+  </fieldset>
+
+  <p><input type="submit" value="submit" /></p>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5deb3; /* warna emas muda */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+form {
+  background-color: #fff8dc; /* warna krem keemasan */
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  width: 60%;
+  max-width: 600px;
+}
+
+fieldset {
+  border: 2px solid goldenrod;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+}
+
+legend {
+  color: #b8860b;
+  font-weight: bold;
+}
+
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 12px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="radio"] {
+  width: auto;
+}
+
+p {
+  text-align: center;
+}
+
+input[type="submit"] {
+  background-color: goldenrod;
+  color: white;
+  font-weight: bold;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #b8860b;
+}
