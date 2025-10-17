@@ -1,12 +1,14 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f5deb3; /* warna emas muda */
+  background-color: #f5deb3;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: 100vh;
   margin: 0;
+  padding-top: 120px;
 }
+
 
 form {
   background-color: #fff8dc; /* warna krem keemasan */
@@ -38,8 +40,7 @@ li {
   margin-bottom: 12px;
 }
 
-input,
-select {
+input,select {
   width: 100%;
   padding: 6px;
   border: 1px solid #ccc;
