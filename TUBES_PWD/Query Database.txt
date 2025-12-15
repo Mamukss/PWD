@@ -1,0 +1,111 @@
+[query untuk database]
+
+CREATE DATABASE IF NOT EXISTS atma_motor
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE atma_motor;
+
+CREATE TABLE users (
+    id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nama_lengkap    VARCHAR(100) NOT NULL,
+    email           VARCHAR(100) NOT NULL UNIQUE,
+    username        VARCHAR(50)  NOT NULL UNIQUE,
+    password_hash   VARCHAR(255) NOT NULL,
+    alamat          TEXT NOT NULL,
+    no_telp         VARCHAR(20) NOT NULL,
+    avatar          VARCHAR(255) DEFAULT NULL,
+    role            ENUM('user','admin') NOT NULL DEFAULT 'user'
+) ENGINE=InnoDB;
+
+
+
+CREATE TABLE motors (
+    id               INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nama_motor       VARCHAR(100) NOT NULL,
+    merek            VARCHAR(50) NOT NULL,
+    tahun            YEAR NOT NULL,
+    harga            BIGINT NOT NULL,
+    stok             INT NOT NULL DEFAULT 0,
+    kapasitas_mesin  INT NOT NULL,
+    deskripsi        TEXT NULL,
+    foto             VARCHAR(255) NULL
+) ENGINE=InnoDB;
+
+
+
+
+CREATE TABLE orders (
+    id                  INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id             INT UNSIGNED NOT NULL,
+    motor_id            INT UNSIGNED NOT NULL,
+
+    warna               VARCHAR(30) NOT NULL,
+    tahun_unit          YEAR NOT NULL,
+
+    metode_pembayaran   ENUM('cash','kredit') NOT NULL,
+    harga_motor         BIGINT NOT NULL,
+
+    alamat_pengiriman   TEXT NOT NULL,
+    catatan             TEXT NULL,
+
+    status              ENUM('pending','proses','dikirim','selesai','dibatalkan')
+                        NOT NULL DEFAULT 'pending',
+
+    CONSTRAINT fk_orders_user
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE CASCADE ON DELETE RESTRICT,
+
+    CONSTRAINT fk_orders_motor
+        FOREIGN KEY (motor_id) REFERENCES motors(id)
+        ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+CREATE TABLE payments (
+    id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    order_id        INT UNSIGNED NOT NULL,
+    metode          VARCHAR(50) NOT NULL,
+    jumlah          BIGINT NOT NULL,
+    status          ENUM('pending','berhasil','gagal') NOT NULL DEFAULT 'pending',
+    tanggal_bayar   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_payments_order
+        FOREIGN KEY (order_id) REFERENCES orders(id)
+        ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE reports (
+    id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    periode         VARCHAR(50) NOT NULL,
+    total_transaksi INT DEFAULT 0,
+    total_pendapatan BIGINT DEFAULT 0,
+    total_motor_terjual INT DEFAULT 0,
+    dibuat_oleh     INT UNSIGNED NOT NULL,
+    dibuat_pada     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_reports_user
+        FOREIGN KEY (dibuat_oleh) REFERENCES users(id)
+        ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+
+
+
+	[query untuk admin]
+
+INSERT INTO USERS (nama_lengkap, email, username, password_hash, alamat, no_telp, avatar, role) VALUES
+('admin', 'admin@gmail.com', 'admin', '$2y$10$zY2VHFj.A67B6YksxJEV3eLlduXjIHTdM0bO7Hv1bpvbz4V7yMECq', 'jogja', 1234567809, null, 'admin')
+
+	[query untuk katalog]
+
+INSERT INTO motor (nama_motor, merek, tahun, kapasitas_mesin, harga, stok, deskripsi, foto) VALUES
+('Honda Vario 160', 'Honda', 2023, 160, 26500000, 12, 'Skutik premium Honda dengan mesin 160cc eSP+.', 'vario160.png'),
+('Yamaha Aerox 155', 'Yamaha', 2023, 155, 29000000, 10, 'Skuter sporty Yamaha Aerox dengan performa tinggi.', 'aerox155.png'),
+('Honda Beat 110', 'Honda', 2022, 110, 18000000, 20, 'Motor skutik paling irit dan populer dari Honda.', 'beat110.png'),
+('Yamaha NMAX 155', 'Yamaha', 2024, 155, 33000000, 8, 'Skutik premium dengan fitur ABS dan mesin BlueCore.', 'nmax155.png'),
+('Suzuki Nex II 113', 'Suzuki', 2022, 113, 17500000, 15, 'Motor skutik entry-level Suzuki, irit dan lincah.', 'nex2.png'),
+('Honda PCX 160', 'Honda', 2023, 160, 34500000, 7, 'Skutik besar nyaman untuk perjalanan jauh.', 'pcx160.png'),
+('Yamaha Fazzio Hybrid', 'Yamaha', 2024, 125, 24750000, 9, 'Motor hybrid stylish dengan teknologi terbaru Yamaha.', 'fazzio.png'),
+('Kawasaki Ninja 250', 'Kawasaki', 2023, 250, 66500000, 5, 'Sport full fairing 250cc paling populer.', 'ninja250.png'),
+('Honda CB150R Streetfire', 'Honda', 2023, 150, 31500000, 14, 'Motor naked sport dengan handling yang 'streetfire.png'),
+('Yamaha MT-25', 'Yamaha', 2023, 250, 56500000, 6, 'Streetfighter 250cc dengan performa agresif.', 'mt25');
